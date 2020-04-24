@@ -24,7 +24,7 @@ namespace Altair_1000.devices
         /// <summary>
         /// Вместимость памяти (байт)
         /// </summary>
-        public UInt16 Size => (UInt16)Cells.Length;
+        public Byte Size => (Byte)Cells.Length;
 
         public RAM()
         {
@@ -49,9 +49,17 @@ namespace Altair_1000.devices
             }
         }
 
+        /// <summary>
+        /// Получить значение ячейки по CWord
+        /// </summary>
+        /// <param name="word">Слово</param>
+        /// <returns>Значение ячейки</returns>
         public CPU.CWord getByCWord(CPU.CWord word)
         {
+            if (word.asByte > (Size - 1))
+                throw new Exception(String.Format("Обращение к несуществующему адресу: {0}", ""));
 
+            return Cells[word.asByte];
         }
     }
 }
