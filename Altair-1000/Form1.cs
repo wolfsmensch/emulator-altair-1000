@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Altair_1000
 {
-    public partial class Form1 : Form
+    public partial class FMain : Form
     {
-        public Form1()
+        public FMain()
         {
             InitializeComponent();
         }
