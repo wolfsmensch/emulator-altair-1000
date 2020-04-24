@@ -101,6 +101,7 @@
             this.panelBankOperStat = new System.Windows.Forms.Panel();
             this.btnLoadBank = new System.Windows.Forms.Button();
             this.btnSaveBank = new System.Windows.Forms.Button();
+            this.checkSkipLogo = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panelBank.SuspendLayout();
@@ -376,6 +377,7 @@
             // 
             // groupState
             // 
+            this.groupState.Controls.Add(this.checkSkipLogo);
             this.groupState.Controls.Add(this.labelError);
             this.groupState.Controls.Add(this.panelStatError);
             this.groupState.Controls.Add(this.checkService);
@@ -482,7 +484,7 @@
             // 
             // btnSwitchState
             // 
-            this.btnSwitchState.Location = new System.Drawing.Point(13, 113);
+            this.btnSwitchState.Location = new System.Drawing.Point(13, 100);
             this.btnSwitchState.Name = "btnSwitchState";
             this.btnSwitchState.Size = new System.Drawing.Size(114, 23);
             this.btnSwitchState.TabIndex = 10;
@@ -492,7 +494,7 @@
             // checkService
             // 
             this.checkService.AutoSize = true;
-            this.checkService.Location = new System.Drawing.Point(13, 144);
+            this.checkService.Location = new System.Drawing.Point(13, 129);
             this.checkService.Name = "checkService";
             this.checkService.Size = new System.Drawing.Size(120, 17);
             this.checkService.TabIndex = 11;
@@ -888,6 +890,16 @@
             this.btnSaveBank.Text = "Сохранить ОЗУ в дамп-файл";
             this.btnSaveBank.UseVisualStyleBackColor = true;
             // 
+            // checkSkipLogo
+            // 
+            this.checkSkipLogo.AutoSize = true;
+            this.checkSkipLogo.Location = new System.Drawing.Point(13, 152);
+            this.checkSkipLogo.Name = "checkSkipLogo";
+            this.checkSkipLogo.Size = new System.Drawing.Size(95, 17);
+            this.checkSkipLogo.TabIndex = 14;
+            this.checkSkipLogo.Text = "Без заставки";
+            this.checkSkipLogo.UseVisualStyleBackColor = true;
+            // 
             // FMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1007,6 +1019,7 @@
         private System.Windows.Forms.Panel panelBankOperStat;
         private System.Windows.Forms.Button btnSaveBank;
         private System.Windows.Forms.Button btnLoadBank;
+        private System.Windows.Forms.CheckBox checkSkipLogo;
     }
 }
 
