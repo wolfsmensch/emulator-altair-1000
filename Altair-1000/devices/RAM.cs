@@ -76,7 +76,7 @@ namespace Altair_1000.devices
         /// <param name="data">Значение</param>
         public void setByCWord(CPU.CWord addr, CPU.CWord data)
         {
-            throw new NotImplementedException();
+            Cells[getIndexByCWord(addr)] = data;
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Altair_1000.devices
         /// <param name="data">Значение</param>
         public void setByHex(string hexAddr, CPU.CWord data)
         {
-            throw new NotImplementedException();
+            Cells[getIndexByHex(hexAddr)] = data;
         }
 
         /// <summary>
