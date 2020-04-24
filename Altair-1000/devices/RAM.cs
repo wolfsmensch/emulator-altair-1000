@@ -19,7 +19,7 @@ namespace Altair_1000.devices
         /// <summary>
         /// Ячейки памяти
         /// </summary>
-        public CPU.CWord[] Cells;
+        private CPU.CWord[] Cells;
 
         /// <summary>
         /// Вместимость памяти (байт)
