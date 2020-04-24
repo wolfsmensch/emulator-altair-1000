@@ -61,5 +61,19 @@ namespace Altair_1000.devices
 
             return Cells[word.asByte];
         }
+
+        /// <summary>
+        /// Полуить значение ячейки по Hex-адресу
+        /// </summary>
+        /// <param name="Hex">Адрес</param>
+        /// <returns>Значение</returns>
+        public CPU.CWord getByHex(string Hex)
+        {
+            Int32 intVal = Int32.Parse(Hex, System.Globalization.NumberStyles.HexNumber);
+            if ((intVal > (Size - 1)) || (intVal < 0))
+                throw new Exception(String.Format("Обращение к несуществующему адресу: {0}", Hex));
+
+            return Cells[(Byte)intVal];
+        }
     }
 }
