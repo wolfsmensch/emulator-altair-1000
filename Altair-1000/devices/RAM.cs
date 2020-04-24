@@ -57,7 +57,7 @@ namespace Altair_1000.devices
         public CPU.CWord getByCWord(CPU.CWord word)
         {
             if (word.asByte > (Size - 1))
-                throw new Exception(String.Format("Обращение к несуществующему адресу: {0}", ""));
+                throw new Exception(String.Format("Обращение к несуществующему адресу: {0}", word.asHex));
 
             return Cells[word.asByte];
         }
