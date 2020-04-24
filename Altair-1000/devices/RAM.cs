@@ -63,7 +63,7 @@ namespace Altair_1000.devices
         }
 
         /// <summary>
-        /// Полуить значение ячейки по Hex-адресу
+        /// Получить значение ячейки по Hex-адресу
         /// </summary>
         /// <param name="Hex">Адрес</param>
         /// <returns>Значение</returns>
