@@ -48,5 +48,10 @@ namespace Altair_1000.devices
                     Cells[i].Data[j] = false;
             }
         }
+
+        public CPU.CWord getByCWord(CPU.CWord word)
+        {
+
+        }
     }
 }
