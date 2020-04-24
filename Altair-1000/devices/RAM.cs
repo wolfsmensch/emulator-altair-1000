@@ -56,10 +56,7 @@ namespace Altair_1000.devices
         /// <returns>Значение ячейки</returns>
         public CPU.CWord getByCWord(CPU.CWord word)
         {
-            if (word.asByte > (Size - 1))
-                throw new Exception(String.Format("Обращение к несуществующему адресу: {0}", word.asHex));
-
-            return Cells[word.asByte];
+            return Cells[getIndexByCWord(word)];
         }
 
         /// <summary>
@@ -69,11 +66,54 @@ namespace Altair_1000.devices
         /// <returns>Значение</returns>
         public CPU.CWord getByHex(string Hex)
         {
-            Int32 intVal = Int32.Parse(Hex, System.Globalization.NumberStyles.HexNumber);
-            if ((intVal > (Size - 1)) || (intVal < 0))
-                throw new Exception(String.Format("Обращение к несуществующему адресу: {0}", Hex));
+            return Cells[getIndexByHex(Hex)];
+        }
 
-            return Cells[(Byte)intVal];
+        /// <summary>
+        /// Установить значение ячейки по CWord-адресу
+        /// </summary>
+        /// <param name="addr">Адрес</param>
+        /// <param name="data">Значение</param>
+        public void setByCWord(CPU.CWord addr, CPU.CWord data)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Установить значение ячейки по HEX-адресу
+        /// </summary>
+        /// <param name="hexAddr">HEX-Адрес</param>
+        /// <param name="data">Значение</param>
+        public void setByHex(string hexAddr, CPU.CWord data)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Получение индекса ячейки по CWord
+        /// </summary>
+        /// <param name="cWordAddr"></param>
+        /// <returns></returns>
+        public Byte getIndexByCWord(CPU.CWord cWordAddr)
+        {
+            if (cWordAddr.asByte > (Size - 1))
+                throw new Exception(String.Format("Обращение к несуществующему адресу: {0}", cWordAddr.asHex));
+
+            return cWordAddr.asByte;
+        }
+
+        /// <summary>
+        /// Получение индекса ячейки по HEX-адресу
+        /// </summary>
+        /// <param name="hexAddr"></param>
+        /// <returns></returns>
+        public Byte getIndexByHex(string hexAddr)
+        {
+            Int32 intVal = Int32.Parse(hexAddr, System.Globalization.NumberStyles.HexNumber);
+            if ((intVal > (Size - 1)) || (intVal < 0))
+                throw new Exception(String.Format("Обращение к несуществующему адресу: {0}", hexAddr));
+
+            return (Byte)intVal;
         }
     }
 }
