@@ -17,6 +17,11 @@ namespace Altair_1000.devices.CPU
         public readonly int Capacity = 8;
 
         /// <summary>
+        /// Максимальная ширина машинного слова
+        /// </summary>
+        public const int MaxCapacity = 8;
+
+        /// <summary>
         /// Биты
         /// </summary>
         public Boolean[] Data;
@@ -30,7 +35,8 @@ namespace Altair_1000.devices.CPU
 
         public CWord(int Capacity)
         {
-            if (Capacity > 8) throw new Exception("Длина машинного слова не может быть больше 8.\nУказанная длина: " + Capacity.ToString());
+            if (Capacity > MaxCapacity) throw new Exception(String.Format("Длина машинного слова не может быть больше {0}.\nУказанная длина: {1}",
+                MaxCapacity, Capacity));
 
             this.Capacity = Capacity;
 

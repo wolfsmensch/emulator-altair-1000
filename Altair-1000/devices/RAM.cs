@@ -44,7 +44,7 @@ namespace Altair_1000.devices
 
             for(int i = 0; i < Size; i++)
             {
-                for(int j = 0; j < CPU.CWord.Capacity; j++)
+                for(int j = 0; j < CPU.CWord.MaxCapacity; j++)
                     Cells[i].Data[j] = false;
             }
         }
