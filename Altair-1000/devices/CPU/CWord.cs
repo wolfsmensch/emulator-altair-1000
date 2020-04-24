@@ -14,15 +14,27 @@ namespace Altair_1000.devices.CPU
         /// <summary>
         /// Ширина машинного слова
         /// </summary>
-        public static readonly int Capacity = 8;
+        public readonly int Capacity = 8;
 
         /// <summary>
         /// Биты
         /// </summary>
-        public Boolean[] Data = new Boolean[Capacity];
+        public Boolean[] Data;
 
         public CWord()
         {
+            Data = new Boolean[Capacity];
+            for (int i = 0; i < Capacity; i++)
+                Data[i] = false;
+        }
+
+        public CWord(int Capacity)
+        {
+            if (Capacity > 8) throw new Exception("Длина машинного слова не может быть больше 8.\nУказанная длина: " + Capacity.ToString());
+
+            this.Capacity = Capacity;
+
+            Data = new Boolean[Capacity];
             for (int i = 0; i < Capacity; i++)
                 Data[i] = false;
         }
