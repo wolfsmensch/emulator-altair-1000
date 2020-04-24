@@ -12,7 +12,7 @@ namespace Altair_1000.devices.CPU
     public class CWord
     {
         public static readonly int Capacity = 8;
-        public List<Boolean> Data = new List<bool>(Capacity);
+        public Boolean[] Data = new Boolean[Capacity];
 
         public CWord()
         {
