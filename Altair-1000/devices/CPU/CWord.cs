@@ -54,5 +54,10 @@ namespace Altair_1000.devices.CPU
 
             return res;
         }
+
+        /// <summary>
+        /// Представление в виде HEX
+        /// </summary>
+        public String asHex => asByte.ToString("X");
     }
 }
