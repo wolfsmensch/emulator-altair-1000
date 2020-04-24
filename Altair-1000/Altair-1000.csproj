@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="devices\CPU\CPU.cs" />
     <Compile Include="devices\CPU\CWord.cs" />
+    <Compile Include="devices\CPU\Register.cs" />
     <Compile Include="devices\RAM.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
