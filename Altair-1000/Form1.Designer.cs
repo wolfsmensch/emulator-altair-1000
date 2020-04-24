@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelBank = new System.Windows.Forms.Panel();
@@ -76,8 +78,33 @@
             this.label7 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnCpuStep = new System.Windows.Forms.Button();
+            this.groupRamControl = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textRamTargetHex = new System.Windows.Forms.TextBox();
+            this.btnSelectRamBlock = new System.Windows.Forms.Button();
+            this.btnClearRam = new System.Windows.Forms.Button();
+            this.groupRAM = new System.Windows.Forms.GroupBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.CellNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CellBin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CellHex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CellBit7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CellBit6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CellBit5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CellBit4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CellBit3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CellBit2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CellBit1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CellBit0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBank = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.panelBankOperStat = new System.Windows.Forms.Panel();
+            this.btnLoadBank = new System.Windows.Forms.Button();
+            this.btnSaveBank = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panelBank.SuspendLayout();
+            this.panelRam.SuspendLayout();
             this.panelRight.SuspendLayout();
             this.panelIO.SuspendLayout();
             this.panelControl.SuspendLayout();
@@ -93,6 +120,10 @@
             this.groupCPU.SuspendLayout();
             this.groupCpuControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.groupRamControl.SuspendLayout();
+            this.groupRAM.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBank.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -122,17 +153,22 @@
             // 
             // panelBank
             // 
+            this.panelBank.Controls.Add(this.groupBank);
             this.panelBank.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBank.Location = new System.Drawing.Point(0, 625);
             this.panelBank.Name = "panelBank";
+            this.panelBank.Padding = new System.Windows.Forms.Padding(5);
             this.panelBank.Size = new System.Drawing.Size(436, 100);
             this.panelBank.TabIndex = 0;
             // 
             // panelRam
             // 
+            this.panelRam.Controls.Add(this.groupRAM);
+            this.panelRam.Controls.Add(this.groupRamControl);
             this.panelRam.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelRam.Location = new System.Drawing.Point(0, 0);
             this.panelRam.Name = "panelRam";
+            this.panelRam.Padding = new System.Windows.Forms.Padding(5, 0, 5, 5);
             this.panelRam.Size = new System.Drawing.Size(436, 625);
             this.panelRam.TabIndex = 1;
             // 
@@ -615,6 +651,243 @@
             this.btnCpuStep.Text = "Выполнить такт";
             this.btnCpuStep.UseVisualStyleBackColor = true;
             // 
+            // groupRamControl
+            // 
+            this.groupRamControl.Controls.Add(this.btnClearRam);
+            this.groupRamControl.Controls.Add(this.btnSelectRamBlock);
+            this.groupRamControl.Controls.Add(this.textRamTargetHex);
+            this.groupRamControl.Controls.Add(this.label8);
+            this.groupRamControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupRamControl.Location = new System.Drawing.Point(5, 538);
+            this.groupRamControl.Name = "groupRamControl";
+            this.groupRamControl.Padding = new System.Windows.Forms.Padding(10);
+            this.groupRamControl.Size = new System.Drawing.Size(426, 82);
+            this.groupRamControl.TabIndex = 0;
+            this.groupRamControl.TabStop = false;
+            this.groupRamControl.Text = "Управление ОЗУ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(13, 23);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(129, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Выбрать по HEX адресу";
+            // 
+            // textRamTargetHex
+            // 
+            this.textRamTargetHex.Location = new System.Drawing.Point(147, 20);
+            this.textRamTargetHex.Name = "textRamTargetHex";
+            this.textRamTargetHex.Size = new System.Drawing.Size(151, 20);
+            this.textRamTargetHex.TabIndex = 1;
+            this.textRamTargetHex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btnSelectRamBlock
+            // 
+            this.btnSelectRamBlock.Location = new System.Drawing.Point(304, 18);
+            this.btnSelectRamBlock.Name = "btnSelectRamBlock";
+            this.btnSelectRamBlock.Size = new System.Drawing.Size(109, 23);
+            this.btnSelectRamBlock.TabIndex = 2;
+            this.btnSelectRamBlock.Text = "Перейти";
+            this.btnSelectRamBlock.UseVisualStyleBackColor = true;
+            // 
+            // btnClearRam
+            // 
+            this.btnClearRam.Location = new System.Drawing.Point(147, 48);
+            this.btnClearRam.Name = "btnClearRam";
+            this.btnClearRam.Size = new System.Drawing.Size(266, 23);
+            this.btnClearRam.TabIndex = 3;
+            this.btnClearRam.Text = "Очистить оперативную память";
+            this.btnClearRam.UseVisualStyleBackColor = true;
+            // 
+            // groupRAM
+            // 
+            this.groupRAM.Controls.Add(this.dataGridView1);
+            this.groupRAM.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupRAM.Location = new System.Drawing.Point(5, 0);
+            this.groupRAM.Name = "groupRAM";
+            this.groupRAM.Size = new System.Drawing.Size(426, 538);
+            this.groupRAM.TabIndex = 1;
+            this.groupRAM.TabStop = false;
+            this.groupRAM.Text = "Оперативная память (256 ячеек)";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CellNum,
+            this.CellBin,
+            this.CellHex,
+            this.CellBit7,
+            this.CellBit6,
+            this.CellBit5,
+            this.CellBit4,
+            this.CellBit3,
+            this.CellBit2,
+            this.CellBit1,
+            this.CellBit0});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(420, 519);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // CellNum
+            // 
+            this.CellNum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.CellNum.HeaderText = "Номер";
+            this.CellNum.Name = "CellNum";
+            this.CellNum.ReadOnly = true;
+            this.CellNum.Width = 66;
+            // 
+            // CellBin
+            // 
+            this.CellBin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.CellBin.HeaderText = "BIN";
+            this.CellBin.Name = "CellBin";
+            this.CellBin.ReadOnly = true;
+            this.CellBin.Width = 50;
+            // 
+            // CellHex
+            // 
+            this.CellHex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.CellHex.HeaderText = "HEX";
+            this.CellHex.Name = "CellHex";
+            this.CellHex.ReadOnly = true;
+            this.CellHex.Width = 54;
+            // 
+            // CellBit7
+            // 
+            this.CellBit7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CellBit7.HeaderText = "7";
+            this.CellBit7.Name = "CellBit7";
+            this.CellBit7.ReadOnly = true;
+            // 
+            // CellBit6
+            // 
+            this.CellBit6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CellBit6.HeaderText = "6";
+            this.CellBit6.Name = "CellBit6";
+            this.CellBit6.ReadOnly = true;
+            // 
+            // CellBit5
+            // 
+            this.CellBit5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CellBit5.HeaderText = "5";
+            this.CellBit5.Name = "CellBit5";
+            this.CellBit5.ReadOnly = true;
+            // 
+            // CellBit4
+            // 
+            this.CellBit4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CellBit4.HeaderText = "4";
+            this.CellBit4.Name = "CellBit4";
+            this.CellBit4.ReadOnly = true;
+            // 
+            // CellBit3
+            // 
+            this.CellBit3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CellBit3.HeaderText = "3";
+            this.CellBit3.Name = "CellBit3";
+            this.CellBit3.ReadOnly = true;
+            // 
+            // CellBit2
+            // 
+            this.CellBit2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CellBit2.HeaderText = "2";
+            this.CellBit2.Name = "CellBit2";
+            this.CellBit2.ReadOnly = true;
+            // 
+            // CellBit1
+            // 
+            this.CellBit1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CellBit1.HeaderText = "1";
+            this.CellBit1.Name = "CellBit1";
+            this.CellBit1.ReadOnly = true;
+            // 
+            // CellBit0
+            // 
+            this.CellBit0.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CellBit0.HeaderText = "0";
+            this.CellBit0.Name = "CellBit0";
+            this.CellBit0.ReadOnly = true;
+            // 
+            // groupBank
+            // 
+            this.groupBank.Controls.Add(this.btnSaveBank);
+            this.groupBank.Controls.Add(this.btnLoadBank);
+            this.groupBank.Controls.Add(this.label9);
+            this.groupBank.Controls.Add(this.panelBankOperStat);
+            this.groupBank.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBank.Location = new System.Drawing.Point(5, 5);
+            this.groupBank.Name = "groupBank";
+            this.groupBank.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBank.Size = new System.Drawing.Size(426, 90);
+            this.groupBank.TabIndex = 0;
+            this.groupBank.TabStop = false;
+            this.groupBank.Text = "Работа с дампами памяти";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(40, 23);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(121, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Выполнение операции";
+            // 
+            // panelBankOperStat
+            // 
+            this.panelBankOperStat.BackColor = System.Drawing.Color.DarkGray;
+            this.panelBankOperStat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelBankOperStat.Location = new System.Drawing.Point(14, 25);
+            this.panelBankOperStat.Name = "panelBankOperStat";
+            this.panelBankOperStat.Size = new System.Drawing.Size(20, 10);
+            this.panelBankOperStat.TabIndex = 16;
+            // 
+            // btnLoadBank
+            // 
+            this.btnLoadBank.Location = new System.Drawing.Point(13, 48);
+            this.btnLoadBank.Name = "btnLoadBank";
+            this.btnLoadBank.Size = new System.Drawing.Size(196, 29);
+            this.btnLoadBank.TabIndex = 18;
+            this.btnLoadBank.Text = "Загрузить дамп из файла";
+            this.btnLoadBank.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveBank
+            // 
+            this.btnSaveBank.Location = new System.Drawing.Point(217, 48);
+            this.btnSaveBank.Name = "btnSaveBank";
+            this.btnSaveBank.Size = new System.Drawing.Size(196, 29);
+            this.btnSaveBank.TabIndex = 19;
+            this.btnSaveBank.Text = "Сохранить ОЗУ в дамп-файл";
+            this.btnSaveBank.UseVisualStyleBackColor = true;
+            // 
             // FMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -629,6 +902,8 @@
             this.Text = "Эмулятор компьютера Altair 1000";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panelBank.ResumeLayout(false);
+            this.panelRam.ResumeLayout(false);
             this.panelRight.ResumeLayout(false);
             this.panelIO.ResumeLayout(false);
             this.panelIO.PerformLayout();
@@ -649,6 +924,12 @@
             this.groupCpuControl.ResumeLayout(false);
             this.groupCpuControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.groupRamControl.ResumeLayout(false);
+            this.groupRamControl.PerformLayout();
+            this.groupRAM.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBank.ResumeLayout(false);
+            this.groupBank.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -703,6 +984,29 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Button btnCpuStep;
+        private System.Windows.Forms.GroupBox groupRamControl;
+        private System.Windows.Forms.Button btnSelectRamBlock;
+        private System.Windows.Forms.TextBox textRamTargetHex;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnClearRam;
+        private System.Windows.Forms.GroupBox groupRAM;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellBin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellHex;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellBit7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellBit6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellBit5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellBit4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellBit3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellBit2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellBit1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CellBit0;
+        private System.Windows.Forms.GroupBox groupBank;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel panelBankOperStat;
+        private System.Windows.Forms.Button btnSaveBank;
+        private System.Windows.Forms.Button btnLoadBank;
     }
 }
 
