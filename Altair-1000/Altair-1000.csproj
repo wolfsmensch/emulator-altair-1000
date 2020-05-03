@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="devices\CPU\Commands\Command.cs" />
+    <Compile Include="devices\CPU\Commands\CommandsList.cs" />
     <Compile Include="devices\CPU\CPU.cs" />
     <Compile Include="devices\CPU\CWord.cs" />
     <Compile Include="devices\CPU\Register.cs" />

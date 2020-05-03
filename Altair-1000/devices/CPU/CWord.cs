@@ -9,7 +9,7 @@ namespace Altair_1000.devices.CPU
     /// <summary>
     /// Машинное слово (8 бит)
     /// </summary>
-    public class CWord
+    public class CWord : ICloneable
     {
         /// <summary>
         /// Ширина машинного слова
@@ -43,7 +43,7 @@ namespace Altair_1000.devices.CPU
             Data = new Boolean[Capacity];
             for (int i = 0; i < Capacity; i++)
                 Data[i] = false;
-        }
+        }        
 
         /// <summary>
         /// Представление в виде типа Byte
@@ -71,6 +71,11 @@ namespace Altair_1000.devices.CPU
             }
 
             return res;
+        }
+
+        public object Clone()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
