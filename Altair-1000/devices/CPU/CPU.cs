@@ -11,6 +11,9 @@ namespace Altair_1000.devices.CPU
     /// </summary>
     public class CPU
     {
+        // Управление питанием
+        public Power PowerDevice;
+
         // Список команд
         private Commands.CommandsList Cmds = null;
 
@@ -61,8 +64,10 @@ namespace Altair_1000.devices.CPU
         
         public RAM RAM = null;
 
-        public CPU(RAM RAM)
+        public CPU(Power PowerDevice, RAM RAM)
         {
+            this.PowerDevice = PowerDevice;
+
             // Инициализация регистров общего назначения
             _Regular = new RegistersList("R", CWord.MaxCapacity);
 
@@ -80,7 +85,10 @@ namespace Altair_1000.devices.CPU
             // Инициализация ОЗУ
             this.RAM = RAM;
             if ((RAM == null) || (RAM.Size <= 0))
-                throw new Exception("Не удалось подключиться к устройству оперативной памяти");
+            {
+                PowerDevice.Fatal("Не удалось подключиться к устройству оперативной памяти");
+                return;
+            }
 
             // Инициализация списка команд
             Cmds = new Commands.CommandsList(this);
@@ -91,7 +99,14 @@ namespace Altair_1000.devices.CPU
         /// </summary>
         public void Clock()
         {
-            if (Cmds == null) throw new Exception("Отсутствует таблица команд");
+            if (Cmds == null)
+            {
+                PowerDevice.Fatal("Отсутствует таблица команд");
+                return;
+            } else if ( !PowerDevice.RegStatus.Data.Data[3] )
+            {
+                throw new Exception("Процессор не может выполнить такт - машина не в штатном режиме работы");
+            }
 
             Boolean isNewCmd = false;
 
@@ -108,7 +123,10 @@ namespace Altair_1000.devices.CPU
                 // Поиск команды в таблице комманд
                 Commands.Command foundCmd = Cmds.findByCWord(_Stack.List[0].Data);
                 if (foundCmd == null)
-                    throw new Exception(String.Format("Неизвестная команда в адресе {0}.\nКоманда: {1}", AddrPointer.Data.asHex, _Stack.List[0].Data.ToString()));
+                {
+                    PowerDevice.Fatal(String.Format("Неизвестная команда в адресе {0}.\nКоманда: {1}", AddrPointer.Data.asHex, _Stack.List[0].Data.ToString()));
+                    return;
+                }
 
                 // Это команда в 1 слово или данные команды полностью в стеке
                 if ( (foundCmd.BytesLength == 1) || (!isNewCmd) )
@@ -119,8 +137,9 @@ namespace Altair_1000.devices.CPU
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception(String.Format("Ошибка исполнения команды в адресе {0}.\nКоманда: {1}\nОшибка: {2}",
+                        PowerDevice.Fatal(String.Format("Ошибка исполнения команды в адресе {0}.\nКоманда: {1}\nОшибка: {2}",
                             AddrPointer.Data.asHex, _Stack.List[0].Data.ToString(), ex.Message));
+                        return;
                     }
 
                     _Stack.Clear();
