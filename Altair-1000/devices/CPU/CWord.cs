@@ -82,5 +82,23 @@ namespace Altair_1000.devices.CPU
         /// Представление в виде HEX
         /// </summary>
         public String asHex => asByte.ToString("X");
+
+        /// <summary>
+        /// Очистка данных
+        /// </summary>
+        public void Clear()
+        {
+            for (int i = 0; i < Capacity; i++)
+                Data[i] = false;
+        }
+
+        /// <summary>
+        /// Инкремент данных
+        /// </summary>
+        /// <returns>Было ли переполнение</returns>
+        public Boolean Inc()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

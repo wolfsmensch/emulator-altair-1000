@@ -12,6 +12,7 @@ namespace Altair_1000.devices.CPU
     public class CPU
     {
         // Список команд
+        private Commands.CommandsList Cmds = null;
 
         // ==============  РЕГИСТРЫ  ==============
 
@@ -44,12 +45,14 @@ namespace Altair_1000.devices.CPU
         /// </summary>
         public RegistersList Stack => _Stack;
         private RegistersList _Stack;
+        private Byte StackDelay = 0;
+        public Byte CurStackIndex => getCurStackIndex();
 
         /// <summary>
         /// Кол-во регистров общего назначения
         /// </summary>
         public static Byte RegularRegistersCount = 16;
-        public static Byte StackSize = 3;
+        public static Byte StackSize = 3;        
 
         /// <summary>
         /// Кол-во выполненных тактов
@@ -77,7 +80,10 @@ namespace Altair_1000.devices.CPU
             // Инициализация ОЗУ
             this.RAM = RAM;
             if ((RAM == null) || (RAM.Size <= 0))
-                throw new Exception("Не удалось подключиться к устройству оперативной памяти");            
+                throw new Exception("Не удалось подключиться к устройству оперативной памяти");
+
+            // Инициализация списка команд
+            Cmds = new Commands.CommandsList(this);
         }
 
         /// <summary>
@@ -85,7 +91,69 @@ namespace Altair_1000.devices.CPU
         /// </summary>
         public void Clock()
         {
-            throw new NotImplementedException();
+            if (Cmds == null) throw new Exception("Отсутствует таблица команд");
+
+            Boolean isNewCmd = false;
+
+            // Нет задержки стека
+            if (StackDelay == 0)
+            {
+                // Стек пуст - значит это новая команда
+                if ( _Stack.isEmpty )
+                {
+                    isNewCmd = true;
+                    _Stack.List[0].Data = RAM.getByCWord(AddrPointer.Data);
+                }
+
+                // Поиск команды в таблице комманд
+                Commands.Command foundCmd = Cmds.findByCWord(_Stack.List[0].Data);
+                if (foundCmd == null)
+                    throw new Exception(String.Format("Неизвестная команда в адресе {0}.\nКоманда: {1}", AddrPointer.Data.asHex, _Stack.List[0].Data.ToString()));
+
+                // Это команда в 1 слово или данные команды полностью в стеке
+                if ( (foundCmd.BytesLength == 1) || (!isNewCmd) )
+                {
+                    try
+                    {
+                        foundCmd.Exec(Commands.Command.getModFromWord(_Stack.List[0].Data));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(String.Format("Ошибка исполнения команды в адресе {0}.\nКоманда: {1}\nОшибка: {2}",
+                            AddrPointer.Data.asHex, _Stack.List[0].Data.ToString(), ex.Message));
+                    }
+
+                    _Stack.Clear();
+                }
+                // Это команда в несколько слов - задаем задержку стека
+                else
+                    StackDelay = (Byte)(foundCmd.BytesLength - 1);
+            }
+            // Есть задержка стека - наполняем его данными
+            else
+            {
+                _Stack.List[CurStackIndex].Data = RAM.getByCWord(AddrPointer.Data);
+                StackDelay--;
+            }
+
+            // Переход к следующему адресу
+            AddrPointer.Data.Inc();
+            CyclesCnt++;
+        }
+
+        /// <summary>
+        /// Получение текущего индекса ячейки стека
+        /// </summary>
+        /// <returns></returns>
+        private Byte getCurStackIndex()
+        {
+            if (StackDelay == 0) return 0;
+
+            Byte Index = StackSize;
+            Index--;
+            Index -= StackDelay;
+
+            return Index;
         }
     }
 }

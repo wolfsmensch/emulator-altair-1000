@@ -57,5 +57,24 @@ namespace Altair_1000.devices.CPU.Commands
 
             return false;
         }
+
+        /// <summary>
+        /// Получение модификатора из машинного слвоа команды
+        /// </summary>
+        /// <param name="cWord">Машинное слово</param>
+        /// <returns>Модификатор</returns>
+        public static CWord getModFromWord(CWord cWord)
+        {
+            CWord Mod = new CWord(ModLength);
+            int ModIndex = ModLength - 1;
+
+            for(int i = cWord.Capacity - 1; (ModIndex >= 0) && (i >= 0); i--)
+            {
+                Mod.Data[ModIndex] = cWord.Data[i];
+                ModIndex--;
+            }
+
+            return Mod;
+        }
     }
 }

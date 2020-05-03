@@ -31,6 +31,23 @@ namespace Altair_1000.devices.CPU
         /// </summary>
         public Byte Count => (Byte)List.Count;
 
+        /// <summary>
+        /// Регистры пусты?
+        /// </summary>
+        public Boolean isEmpty
+        {
+            get
+            {
+                for(int i = 0; i < List.Count; i++)
+                {
+                    if (List[i].Data.asByte != 0)
+                        return false;
+                }
+
+                return true;
+            }
+        }
+
         public RegistersList(String Name = "", Byte RegistersCapacity = CWord.MaxCapacity)
         {
             this.Name = (Name.Length > 0) ? Name : String.Empty;
@@ -85,6 +102,15 @@ namespace Altair_1000.devices.CPU
                 throw new Exception(String.Format("Несовпадение ширины данных присваемого значения и целевого регистра на адресе {0}", Addr.asHex));
 
             List[getIndexByCWord(Addr)].Data = Data;
+        }
+
+        /// <summary>
+        /// Очистка данных
+        /// </summary>
+        public void Clear()
+        {
+            for (int i = 0; i < List.Count; i++)
+                List[i].Data.Clear();
         }
     }
 }
